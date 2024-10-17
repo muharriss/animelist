@@ -1,5 +1,4 @@
-import prisma from "@/libs/prisma";
-
+import { NextResponse } from "next/server"
 
 export async function POST(request) {
     const { anime_mal_id, user_email, anime_image, anime_title } = await request.json()
@@ -9,13 +8,6 @@ export async function POST(request) {
     if (!createCollection) return Response.json({ status: 500, isCreated: false })
     else return Response.json({ status: 200, isCreated: true })
 }
-
-// export async function DELATE(request) {
-//     const { anime_mal_id, user_email} = await request.json()
-//     const data = {anime_mal_id, user_email} = await request.json()
-
-//     const deleteCollection = await prisma.collection
-// }
 
 export async function DELETE(request) {
     try {

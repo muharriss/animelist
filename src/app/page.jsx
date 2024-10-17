@@ -1,6 +1,8 @@
 import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
+import { authOption } from "./api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth"
 
 const Page = async () => {
 
@@ -14,17 +16,20 @@ const Page = async () => {
   recommendedAnime = reproduce(recommendedAnime, 4)
 
 
+  // const session = await getServerSession(authOption)
+  // console.log("cek sesion", session)
+
   return (
-      <div className="w-full flex flex-col justify-center items-center">
-        <section className="max-w-5xl">
-          <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
-          <AnimeList api={topAnime} />
-        </section>
-        <section className="max-w-5xl">
-          <Header title={"Rekomendasi"} />
-          <AnimeList api={recommendedAnime} />
-        </section>
-      </div>
+    <div className="w-full flex flex-col justify-center items-center">
+      <section className="max-w-5xl">
+        <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
+        <AnimeList api={topAnime} />
+      </section>
+      <section className="max-w-5xl">
+        <Header title={"Rekomendasi"} />
+        <AnimeList api={recommendedAnime} />
+      </section>
+    </div>
   );
 }
 

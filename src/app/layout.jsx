@@ -9,6 +9,7 @@ export const metadata = {
   description: "Website Anime Indonesia",
 };
 
+
 export default function RootLayout({ children }) {
 
   return (
