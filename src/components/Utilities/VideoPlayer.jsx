@@ -1,6 +1,7 @@
 "use client"
 
-const { default: YouTube } = require("react-youtube")
+// const { default: YouTube } = require("react-youtube")
+import YouTube from "react-youtube";
 
 const VideoPlayer = ({ youtubeId }) => {
     return (

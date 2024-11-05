@@ -6,7 +6,7 @@ import ListBar from "./ListBar"
 import StateProvider from "./StateContext"
 import { authUserSession } from "@/libs/auth-libs"
 
-const Navbar = async() => {
+const Navbar = async () => {
 
     const user = await authUserSession()
 
@@ -19,10 +19,10 @@ const Navbar = async() => {
                         <Link href={"/"} className="font-bold text-2xl ">AnimeList</Link>
                         <UserActionButton />
                     </div>
-                    <InputSearch />
+                    <InputSearch user={user} />
                 </div>
             </header>
-         </StateProvider>
+        </StateProvider>
     )
 }
 

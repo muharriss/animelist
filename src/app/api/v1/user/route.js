@@ -9,7 +9,7 @@ export async function POST(req) {
 
     // Validasi input
       if (!name || !email || !password) {
-        return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
+        return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
        }
     
         // check if email already exists

@@ -9,18 +9,21 @@ export const metadata = {
   description: "Website Anime Indonesia",
 };
 
+import { ThemeProviders } from "@/components/Navbar/Theme-provider";
 
 export default function RootLayout({ children }) {
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`bg-white dark:bg-[#1e1e1e] text-black dark:text-[#e0e0e0] ${inter.className}`}>
-        <div>
-          <Navbar />
-          <div className="pt-16">
-            {children}
+        <ThemeProviders>
+          <div>
+            <Navbar />
+            <div className="pt-16">
+              {children}
+            </div>
           </div>
-        </div>
+        </ThemeProviders>
       </body>
     </html>
   );

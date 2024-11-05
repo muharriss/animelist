@@ -2,19 +2,44 @@
 
 import { List, MagnifyingGlass, Moon, Sun } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { useSharedState } from "./StateContext"
 
-import useDarkMode from "./useDarkMode"
+// import useDarkMode from "./useDarkMode"
 
-const InputSearch = () => {
+import { useTheme } from 'next-themes'
+import Image from "next/image"
+
+import defaultImg from "@/app/users/dashboard/default-picture.jpeg"
+
+const InputSearch = ({ user }) => {
     const [toggleInput, setToggleInput] = useState(false)
     const { toggleList, setToggleList } = useSharedState();
     const [searchValue, setSearchValue] = useState("")
     const router = useRouter()
 
-    const { theme, toggleTheme } = useDarkMode();
+    // const { theme, toggleTheme } = useDarkMode();
+
+    const [mounted, setMounted] = useState(false)
+    const { setTheme, resolvedTheme } = useTheme()
+
+    useEffect(() => setMounted(true), [])
+
+    if (!mounted) {
+        return (
+            <div className="flex items-center gap-2 animate-pulse">
+                <MagnifyingGlass size={28} weight="thin"  className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
+               
+                <List weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
+                {user? (
+                    <div className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
+                        <Image src={user?.image ? user?.image : defaultImg} alt="image" width={50} height={50} />
+                    </div>
+                ) : null}
+            </div>
+        )
+    }
 
     const handleSearch = (event) => {
 
@@ -29,17 +54,22 @@ const InputSearch = () => {
     }
 
     return (
-        <div className="flex items-center gap-2  ">
+        <div className="flex items-center gap-2 ">
             <input placeholder="cari anime..." onKeyDown={handleSearch} className={`shadow-sm border-2 dark:border-[#333333] rounded-md outline-none p-2 dark:bg-[#121212] ${toggleInput ? "block" : "hidden"}`} onChange={e => setSearchValue(e.target.value)} />
-            <MagnifyingGlass  size={28} weight="thin" onClick={handleSearch} className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
+            <MagnifyingGlass size={28} weight="thin" onClick={handleSearch} className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
             {
-                theme == "light"
+                resolvedTheme === "light"
                     ?
-                    <Sun size={28} weight="thin" onClick={toggleTheme} className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all"/>
+                    <Sun size={28} weight="thin" onClick={() => setTheme('dark')} className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
                     :
-                    <Moon onClick={toggleTheme} size={28} weight="thin" className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all"/>
+                    <Moon onClick={() => setTheme('light')} size={28} weight="thin" className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
             }
             <List onClick={() => setToggleList(!toggleList)} weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
+            {user? (
+                <div className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
+                    <Image src={user?.image ? user?.image : defaultImg} alt="image" width={50} height={50} />
+                </div>
+            ) : null}
         </div>
     )
 }

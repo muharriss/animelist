@@ -1,8 +1,6 @@
 import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
-import { authOption } from "./api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth"
 
 const Page = async () => {
 
