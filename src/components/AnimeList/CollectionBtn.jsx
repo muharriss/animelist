@@ -46,6 +46,9 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
             const data = { anime_mal_id, user_email }
             const response = await fetch("/api/v1/collection", {
                 method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(data)
             })
             const collection = await response.json()
