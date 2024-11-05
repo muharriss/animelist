@@ -23,7 +23,7 @@ const UserActionButton = async () => {
             {
                 user?.role == "admin" && <Link href={"/admin"} className="hover:text-[#1e88e5] transition-all">Admin</Link>  
             }
-            <Link href={actionURL} className="hover:text-[#1e88e5] transition-all">{actionLabel}</Link>
+            <Link href={actionURL} className="hover:text-[#1e88e5] transition-all ">{actionLabel}</Link>
         </div>
     )
 }

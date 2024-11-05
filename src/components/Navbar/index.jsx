@@ -16,7 +16,7 @@ const Navbar = async () => {
                 <ListBar user={user} />
                 <div className='flex items-center flex-row justify-between  border-b border-[#8582823a] p-3 py-4 gap-2 rounded-t-md xl:px-20'>
                     <div className="flex justify-center items-center gap-9">
-                        <Link href={"/"} className="font-bold text-2xl ">AnimeList</Link>
+                        <Link href={"/"} className="font-bold text-2xl w-0 sm:w-auto">AnimeList</Link>
                         <UserActionButton />
                     </div>
                     <InputSearch user={user} />
