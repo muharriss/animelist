@@ -9,6 +9,7 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
 
     const [isCreated, setIsCreated] = useState(false)
     // const [isVisible, setIsVisible] = useState(false)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -24,6 +25,7 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
 
     const handleCollection = async (event) => {
         event.preventDefault()
+        setLoading(true)
         if (!isCreated) {
 
             const data = { anime_mal_id, user_email, anime_image, anime_title }
@@ -36,6 +38,7 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
             const collection = await response.json()
             if (collection.status == 200) {
                 setIsCreated(true)
+                setLoading(false)
                 router.refresh()
 
                 // setIsVisible(true); // Tampilkan teks
@@ -51,6 +54,7 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
             const collection = await response.json()
             if (collection.status == 200) {
                 setIsCreated(false)
+                setLoading(false)
                 router.refresh()
             }
         }
@@ -64,17 +68,25 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
             {
                 isCreated
                     ?
-                    <div className="cursor-pointer flex justify-center items-center border border-gray-400 rounded px-2 w-24" onClick={handleCollection} title="remove from collection">
+                    <div className="cursor-pointer flex justify-center items-center border border-gray-400 rounded px-2 w-auto" onClick={handleCollection} title="remove from collection">
                         <div className="relative">
                             <BookmarkSimple size={25} />
                             <X size={12} className="absolute top-[16%] right-[25%] " weight="bold" />
                         </div>
-                        <p className="text-sm font-bold">Hapus</p>
+                        {loading ? (
+                            <p className="text-sm font-bold animate-pulse">Hapus...</p>
+                        ) : (
+                            <p className="text-sm font-bold">Hapus</p>
+                        )}
                     </div>
                     :
-                    <div title="Add to collection" className="flex justify-center items-center border border-gray-400 rounded px-2 w-24 cursor-pointer" onClick={handleCollection}>
+                    <div title="Add to collection" className="flex justify-center items-center border border-gray-400 rounded px-2 w-auto cursor-pointer" onClick={handleCollection}>
                         <BookmarkSimple size={25} />
-                        <p className="text-sm font-bold">Collect</p>
+                        {loading ? (
+                            <p className="text-sm font-bold animate-pulse">Collect...</p>
+                        ) : (
+                            <p className="text-sm font-bold">Collect</p>
+                        )}
                     </div>
             }
         </div>
