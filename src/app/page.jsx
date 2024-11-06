@@ -25,7 +25,11 @@ const Page = async () => {
       </section>
       <section className="max-w-5xl">
         <Header title={"Rekomendasi"} />
-        <AnimeList api={recommendedAnime} />
+        {recommendedAnime.data.length < 1 || recommendedAnime == undefined ? (
+          <p>Something went wrong!</p>
+        ) : (
+          <AnimeList api={recommendedAnime} />
+        )}
       </section>
     </div>
   );
