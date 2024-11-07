@@ -12,7 +12,7 @@ const Navbar = async () => {
 
     return (
         <StateProvider>
-            <header className="fixed w-full backdrop-blur-sm z-10">
+            <header className="fixed w-full backdrop-blur-sm z-20">
                 <ListBar user={user} />
                 <div className='flex items-center flex-row justify-between  border-b border-[#8582823a] p-3 py-4 gap-2 rounded-t-md xl:px-20'>
                     <div className="flex justify-center items-center gap-9">
