@@ -7,7 +7,7 @@ const Page = async () => {
   const topAnime = await getAnimeResponse("top/anime", "limit=8")
 
   // let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry")
-  
+
   // const end = Math.floor(Math.random() * (200 - 4 + 1)) + 4
   // const start = end - 4
   // recommendedAnime = { data: recommendedAnime.slice(start, end) }
@@ -17,6 +17,7 @@ const Page = async () => {
 
   // const session = await getServerSession(authOption)
   // console.log("cek sesion", session)
+  
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
