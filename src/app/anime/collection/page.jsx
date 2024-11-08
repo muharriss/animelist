@@ -51,7 +51,13 @@ const Page = () => {
                                     <div key={anime.mal_id} className="relative m-1 hover:text-[#1e88e5] transition-all">
                                         <DeleteBookmarkBtn  mal_id={anime.mal_id} onDelete={handleDeleteBookmark}/>
                                         <Link href={`/anime/${anime.mal_id}`}>
-                                            <Image src={anime.images.webp.image_url} alt={anime.images.jpg.image_url} width={1000} height={1000} priority className="rounded-md" />
+                                            <img
+                                            src={anime.images.webp.image_url} 
+                                            alt={anime.images.jpg.image_url} 
+                                            width={1000} 
+                                            height={1000} 
+                                            // priority 
+                                            className="rounded-md" />
                                             <p className="text-center font-bold pt-1 ">{anime.title}</p>
                                         </Link>
                                     </div>

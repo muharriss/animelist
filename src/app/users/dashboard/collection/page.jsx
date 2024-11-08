@@ -27,7 +27,13 @@ const Page = async () => {
                                     <div key={anime.anime_mal_id} className="relative m-1 hover:text-[#1e88e5] transition-all">
                                         <DeleteCollectionBtn anime_mal_id={anime.anime_mal_id} user_email={user.email} />
                                         <Link href={`/anime/${anime.anime_mal_id}`}>
-                                            <Image src={anime.anime_image} alt={"image"} width={1000} height={1000} priority className="rounded-md" />
+                                            <img
+                                            src={anime.anime_image} 
+                                            alt={"image"} 
+                                            width={1000} 
+                                            height={1000} 
+                                            // priority 
+                                            className="rounded-md" />
                                             <p className="text-center font-bold pt-1 ">{anime.anime_title}</p>
                                         </Link>
                                     </div>

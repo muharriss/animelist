@@ -21,13 +21,13 @@ const Page = async ({ params: { id } }) => {
             {/* <Notif notif_text={"Berhasil ditambahkan di Local"} isVisible={true}/> */}
             <div className="max-w-2xl">
                 <div className="flex flex-col justify-center items-center pt-4">
-                    <Image
+                    <img
                         src={detailAnime.data.images.webp.large_image_url}
                         alt={detailAnime.data.images.jpg.large_image_url}
                         width={1000}
                         height={1000}
                         className="rounded max-w-96"
-                        priority
+                        // priority
                     />
 
                     <div className="pt-6 w-full">
