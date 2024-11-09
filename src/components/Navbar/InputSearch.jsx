@@ -11,7 +11,6 @@ import { useSharedState } from "./StateContext"
 import { useTheme } from 'next-themes'
 import Image from "next/image"
 
-import defaultImg from "@/app/users/dashboard/default-picture.jpeg"
 import Link from "next/link"
 
 const InputSearch = ({ user }) => {
@@ -19,6 +18,8 @@ const InputSearch = ({ user }) => {
     const { toggleList, setToggleList } = useSharedState();
     const [searchValue, setSearchValue] = useState("")
     const router = useRouter()
+
+    const defaultImg = "/default-profile.jpeg"
 
     // const { theme, toggleTheme } = useDarkMode();
 
@@ -30,12 +31,16 @@ const InputSearch = ({ user }) => {
     if (!mounted) {
         return (
             <div className="flex items-center gap-2 animate-pulse">
-                <MagnifyingGlass size={28} weight="thin"  className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
-               
+                <MagnifyingGlass size={28} weight="thin" className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
+
                 <List weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
-                {user? (
+                {user ? (
                     <div className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
-                        <Image src={user?.image ? user?.image : defaultImg} alt={defaultImg} width={50} height={50} />
+                        <img
+                            src={user?.image ? user?.image : defaultImg}
+                            alt={defaultImg}
+                            width={50}
+                            height={50} />
                     </div>
                 ) : null}
             </div>
@@ -66,9 +71,13 @@ const InputSearch = ({ user }) => {
                     <Moon onClick={() => setTheme('light')} size={28} weight="thin" className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
             }
             <List onClick={() => setToggleList(!toggleList)} weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
-            {user? (
+            {user ? (
                 <Link href={"/users/dashboard"} className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
-                    <Image src={user?.image ? user?.image : defaultImg} alt={defaultImg} width={50} height={50} />
+                    <img
+                        src={user?.image ? user?.image : defaultImg}
+                        alt={defaultImg}
+                        width={50}
+                        height={50} />
                 </Link>
             ) : null}
         </div>
