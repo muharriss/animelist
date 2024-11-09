@@ -35,7 +35,7 @@ const InputSearch = ({ user }) => {
                 <List weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
                 {user? (
                     <div className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
-                        <Image src={user?.image ? user?.image : defaultImg} alt="image" width={50} height={50} />
+                        <Image src={user?.image ? user?.image : defaultImg} alt={defaultImg} width={50} height={50} />
                     </div>
                 ) : null}
             </div>
@@ -68,7 +68,7 @@ const InputSearch = ({ user }) => {
             <List onClick={() => setToggleList(!toggleList)} weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
             {user? (
                 <Link href={"/users/dashboard"} className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
-                    <Image src={user?.image ? user?.image : defaultImg} alt="image" width={50} height={50} />
+                    <Image src={user?.image ? user?.image : defaultImg} alt={defaultImg} width={50} height={50} />
                 </Link>
             ) : null}
         </div>

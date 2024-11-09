@@ -12,7 +12,7 @@ const Page = async () => {
             <Image 
             className="rounded-full max-w-60" 
             src={user?.image ? user?.image : defaultImg} 
-            alt="image" 
+            alt={defaultImg} 
             width={1000} 
             height={1000} 
             priority
