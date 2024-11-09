@@ -7,9 +7,19 @@ import { getAnimeResponse } from "@/libs/api-libs";
 
 
 const Page = () => {
+   
+    const [isMounted, setIsMounted] = useState(false);
+    const [page, setPage] = useState(1);
+    const [topAnime, setTopAnime] = useState([]);
 
-    const [page, setPage] = useState(1)
-    const [topAnime, setTopAnime] = useState([])
+    useEffect(() => {
+        // Mengatur nilai page dari localStorage saat komponen di-mount di klien
+        if (typeof window !== "undefined") {
+            const savedPage = parseInt(localStorage.getItem("currentPage")) || 1;
+            setPage(savedPage);
+            setIsMounted(true);
+        }
+    }, []);
 
     const fetchData = async () => {
         const animeTeratas = await getAnimeResponse("top/anime", `page=${page}`)
@@ -17,9 +27,15 @@ const Page = () => {
     }
 
     useEffect(() => {
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page])
+        if (isMounted) {
+            fetchData();
+            localStorage.setItem("currentPage", page);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page, isMounted]);
+
+
+    // if (!isMounted) return null;
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
