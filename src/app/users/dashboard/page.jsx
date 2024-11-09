@@ -12,8 +12,8 @@ const Page = async () => {
             <p className="text-2xl font-bold">Welcome! {user?.name}</p>
             <img
                 className="rounded-full max-w-60"
-                src={defaultImg} //sementara
-                // src={user?.image ? user?.image : defaultImg} 
+                // src={defaultImg} //sementara
+                src={user?.image ? user?.image : defaultImg} 
                 alt={defaultImg}
                 width={1000}
                 height={1000}
