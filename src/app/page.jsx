@@ -17,10 +17,21 @@ const Page = async () => {
 
   // const session = await getServerSession(authOption)
   // console.log("cek sesion", session)
-  
+
+  const seasonAnime = await getAnimeResponse("seasons/now", "limit=4")
+  const upcoming = await getAnimeResponse("seasons/upcoming", "limit=4")
+
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
+      <section className="max-w-5xl">
+        <Header LinkHref={"/season"} title={"Season Ini"} LinkTitle={"Lihat semua..."} />
+        <AnimeList api={seasonAnime} />
+      </section>
+      <section className="max-w-5xl">
+        <Header LinkHref={"/upcoming"} title={"Akan Datang"} LinkTitle={"Lihat semua..."} />
+        <AnimeList api={upcoming} />
+      </section>
       <section className="max-w-5xl">
         <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={topAnime} />
