@@ -9,7 +9,7 @@ const UserActionButton = async () => {
     const actionURL = user ? "/api/auth/signout" : "/api/auth/signin"
 
     return (
-        <div className="hidden gap-3 sm:flex">
+        <div className="hidden gap-3 sm:flex text-nowrap w-0">
             {
                 user ? <Link href="/users/dashboard" className="hover:text-[#1e88e5] transition-all">Dashboard</Link> : null
             }

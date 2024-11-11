@@ -24,7 +24,7 @@ const Page = async () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <section className="max-w-5xl">
+      <section className="max-w-5xl pt-3">
         <Header LinkHref={"/season"} title={"Season Ini"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={seasonAnime} />
       </section>
