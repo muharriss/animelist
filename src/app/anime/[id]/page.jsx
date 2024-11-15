@@ -16,6 +16,8 @@ const Page = async ({ params: { id } }) => {
         where: { user_email: user?.email, anime_mal_id: detailAnime.data.mal_id }
     })
 
+    const charactersAnime = await getAnimeResponse(`anime/${id}/characters`)
+
     return (
         <div className="w-full flex flex-col justify-center items-center p-5">
             {/* <Notif notif_text={"Berhasil ditambahkan di Local"} isVisible={true}/> */}
@@ -26,8 +28,8 @@ const Page = async ({ params: { id } }) => {
                         alt={detailAnime.data.images.jpg.large_image_url}
                         width={1000}
                         height={1000}
-                        className="rounded max-w-96"
-                        // priority
+                        className="rounded-md max-w-96"
+                    // priority
                     />
 
                     <div className="pt-6 w-full">
@@ -71,6 +73,28 @@ const Page = async ({ params: { id } }) => {
                         <p className="w-32 border-r dark:border-[#333333]">Released</p>
                         <p className="pl-7">{detailAnime.data.aired.string}</p>
                     </div>
+                </div>
+                <div className="py-7 pb-4">
+                    <h1 className="font-bold text-xl border-l-4 border-[#1e88e5] pl-3 ">Characters</h1>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 justify-center py-2  pt-0">
+                    {charactersAnime.data.slice(0, 20).map((anime, index) => {
+                        return (
+                            <div key={index} className="relative rounded-xl overflow-hidden">
+                                <img
+                                    src={anime.character.images.webp.image_url}
+                                    alt={anime.character.images.jpg.image_url}
+                                    width={1000}
+                                    height={1000}
+                                    className=" max-h-52 sm:max-h-72 object-cover "
+                                // priority
+                                />
+                                <div className="absolute h-full w-full bg-gradient-to-t from-neutral-900 via-transparent top-0" />
+                                <p className="absolute bottom-2 left-1 ">{anime.character.name}</p>
+                            </div>
+
+                        )
+                    })}
                 </div>
                 <div className="mt-4">
                     <VideoPlayer youtubeId={detailAnime.data.trailer.youtube_id} />
