@@ -15,7 +15,7 @@ const Page = ({ params: { year, season } }) => {
     useEffect(() => {
         // Mengatur nilai page dari localStorage saat komponen di-mount di klien
         if (typeof window !== "undefined") {
-            const savedPage = parseInt(localStorage.getItem("seasonPage")) || 1;
+            const savedPage = parseInt(localStorage.getItem(`${season}${year}`)) || 1;
             setPage(savedPage);
             setIsMounted(true);
         }
@@ -29,10 +29,12 @@ const Page = ({ params: { year, season } }) => {
     useEffect(() => {
         if (isMounted) {
             fetchData();
-            localStorage.setItem("seasonPage", page);
+            localStorage.setItem(`${season}${year}`, page);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, isMounted]);
+
+    // console.log(`${season}${year}`)
 
 
     // if (!isMounted) return null;
