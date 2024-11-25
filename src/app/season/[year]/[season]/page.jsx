@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getAnimeResponse } from "@/libs/api-libs";
 
 
-const Page = () => {
+const Page = ({ params: { year, season } }) => {
    
     const [isMounted, setIsMounted] = useState(false);
     const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ const Page = () => {
     }, []);
 
     const fetchData = async () => {
-        const seasonAnime = await getAnimeResponse("seasons/now", `page=${page}`)
+        const seasonAnime = await getAnimeResponse(`seasons/${year}/${season}`, `page=${page}`)
         setSeasonAnime(seasonAnime)
     }
 
@@ -40,7 +40,7 @@ const Page = () => {
     return (
         <div className="w-full flex flex-col justify-center items-center">
             <section className="max-w-5xl">
-                <HeaderMenu title={`Anime Season Ini #${page}`} />
+                <HeaderMenu title={`Anime ${season} ${year} #${page}`} />
                 <AnimeList api={seasonAnime} />
                 <Pagination setPage={setPage} page={page} lastPage={seasonAnime.pagination?.last_visible_page} />
             </section>

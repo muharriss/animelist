@@ -1,11 +1,13 @@
 import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
+import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
 
 const Page = async () => {
 
-  const topAnime = await getAnimeResponse("top/anime", "limit=8")
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+  const topAnime = await getAnimeResponse("top/anime", "limit=8")
   let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry")
 
   // const end = Math.floor(Math.random() * (200 - 4 + 1)) + 4
@@ -13,29 +15,35 @@ const Page = async () => {
   // recommendedAnime = { data: recommendedAnime.slice(start, end) }
 
   recommendedAnime = reproduce(recommendedAnime, 4)
-
-
   // const session = await getServerSession(authOption)
   // console.log("cek sesion", session)
 
-  const seasonAnime = await getAnimeResponse("seasons/now", "limit=4")
+  // const seasonAnime = await getAnimeResponse("seasons/now", "limit=1")
   const upcoming = await getAnimeResponse("seasons/upcoming", "limit=4")
 
+  // const seasonsList = await getAnimeResponse("seasons")
+  // const dataSeasonsList = seasonsList.data.flatMap(({ year, seasons }) =>
+  //   seasons.reverse().map((season) => ({ season, year }))
+  // );
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <section className="max-w-5xl pt-3">
-        <Header LinkHref={"/season"} title={"Season Ini"} LinkTitle={"Lihat semua..."} />
-        <AnimeList api={seasonAnime} />
+        {/* <Header LinkHref={"/season"} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} /> */}
+        {/* <SeasonalAnime seasonNow={seasonAnime.data[0].season} yearNow = {seasonAnime.data[0].year}/> */}
+        <SeasonalAnime />
       </section>
+      {await delay(500)}
       <section className="max-w-5xl">
         <Header LinkHref={"/upcoming"} title={"Akan Datang"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={upcoming} />
       </section>
+      {await delay(500)}
       <section className="max-w-5xl">
         <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={topAnime} />
       </section>
+      {await delay(500)}
       <section className="max-w-5xl">
         <Header title={"Rekomendasi"} />
         {recommendedAnime.data?.length < 1 || recommendedAnime == undefined ? (
