@@ -66,8 +66,6 @@ const SeasonalAnime = () => {
         fetchData()
     }, [season])
 
-    console.log(toggleSeason)
-
     return (
         <>
             <Header LinkHref={`/season/${year}/${season}`} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} />
