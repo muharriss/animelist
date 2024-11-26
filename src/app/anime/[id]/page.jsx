@@ -80,7 +80,10 @@ const Page = async ({ params: { id } }) => {
                 <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 justify-center py-2  pt-0">
                     {charactersAnime.data.slice(0, 20).map((anime, index) => {
                         return (
-                            <div key={index} className="relative rounded-xl overflow-hidden">
+                            <div key={index} className="relative rounded-xl overflow-hidden ">
+                                <div className={`flex justify-center items-center gap-1 absolute right-0 ${anime.role == "Main" ? "bg-[#1e88e5]" : "bg-orange-400"} bg-opacity-[85%] m-1 p-1  rounded-md z-10`}>
+                                    <p className="text-gray-200 text-sm">{anime.role}</p>
+                                </div>
                                 <img
                                     src={anime.character.images.webp.image_url}
                                     alt={anime.character.images.jpg.image_url}

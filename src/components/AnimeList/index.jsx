@@ -8,9 +8,8 @@ const AnimeList = ({ api }) => {
                 return (
                     <div key={index} className="relative">
                         <div className={`flex justify-center items-center gap-1 absolute right-0 bg-yellow-500 bg-opacity-[85%] m-1 p-1  rounded-md z-10 ${!anime.score ? "hidden": "block"}`}>
-                            {/* <Star size={13} weight="fill" color="#ffffff"/> */}
                             <p className="text-white">★</p>
-                            <p className="text-gray-200">{anime.score}</p>
+                            <p className="text-gray-200 text-sm">{anime.score}</p>
                         </div>
                         <Link href={`/anime/${anime.mal_id}`} className=" hover:text-[#1e88e5] transition-all pb-5 " >
                             <img
