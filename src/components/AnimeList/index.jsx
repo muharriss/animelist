@@ -7,7 +7,7 @@ const AnimeList = ({ api }) => {
             {api.data?.map((anime, index) => {
                 return (
                     <div key={index} className="relative">
-                        <div className={`flex justify-center items-center gap-1 absolute right-0 bg-yellow-500 bg-opacity-[85%] m-1 p-1  rounded-md z-10 ${!anime.score ? "hidden": "block"}`}>
+                        <div className={`flex justify-center items-center gap-1 absolute right-0 bg-yellow-500 bg-opacity-[85%] m-1 p-1  rounded-md z-[5] ${!anime.score ? "hidden": "block"}`}>
                             <p className="text-white">★</p>
                             <p className="text-gray-200 text-sm">{anime.score}</p>
                         </div>
