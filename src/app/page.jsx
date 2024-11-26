@@ -2,7 +2,7 @@ import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
 import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
-import Intro from "@/components/AnimeList/Intro";
+// import Intro from "@/components/AnimeList/Intro";
 
 const Page = async () => {
 
@@ -28,7 +28,7 @@ const Page = async () => {
   // );
 
   return (
-    <div className=" w-full flex flex-col justify-center items-center ">
+    <div className=" w-full flex flex-col justify-center items-center gap-5">
       {/* <div className="overflow-hidden rounded-md">
         <img
           src={upcoming.data[2].trailer.images.maximum_image_url} className="h-[50vh] w-screen max-w-[950px] object-cover "
@@ -52,7 +52,7 @@ const Page = async () => {
         <AnimeList api={topAnime} />
       </section>
       {await delay(500)}
-      <section className="">
+      <section className="pb-5">
         <Header title={"Rekomendasi"} />
         {recommendedAnime.data?.length < 1 || recommendedAnime == undefined ? (
           <p>Something went wrong!</p>

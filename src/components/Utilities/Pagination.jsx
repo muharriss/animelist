@@ -23,7 +23,7 @@ const Pagination = ({ setPage, page, lastPage }) => {
 
     return (
         <div>
-            <div className="flex justify-center items-center p-4 gap-5 ">
+            <div className="flex justify-center items-center p-4 gap-5 pb-8 ">
                 {page > 1
                     ? <button onClick={handlePrevPage}>Prev</button>
                     : null
