@@ -64,7 +64,13 @@ const SeasonalAnime = () => {
 
     useEffect(() => {
         fetchData()
+        // localStorage.removeItem('fall2024')
     }, [season])
+
+    useEffect(() => {
+        localStorage.removeItem("upcomingPage")
+        localStorage.removeItem("populerPage")
+    }, [])
 
     return (
         <>
@@ -107,6 +113,7 @@ const SeasonalAnime = () => {
                                     if (season == seasonalAnime.data[0].season && year == seasonalAnime.data[0].year) {
                                         setToggleSeason(!toggleSeason)
                                     }
+                                    localStorage.removeItem(`${season}${year}`)
                                 }} key={`${index}`} className={`capitalize ${season == seasonalAnime.data[0].season && year == seasonalAnime.data[0].year ? "opacity-[100%] sm:pointer-events-none" : "opacity-[50%] hidden sm:block"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}>
                                     <div className="flex justify-center items-center gap-2">
                                         <p>{`${season} ${year}`}</p>
@@ -123,6 +130,7 @@ const SeasonalAnime = () => {
                                     <button onClick={() => {
                                         setSeason(season)
                                         setYear(year)
+                                        localStorage.removeItem(`${season}${year}`)
                                     }} key={`${index}`} className={`capitalize ${season == seasonalAnime.data[0].season && year == seasonalAnime.data[0].year ? "opacity-[100%] text-[#1e88e5] w-full text-left" : "opacity-[100%]"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}>
                                         <p>{`${season} ${year}`}</p>
                                     </button>
