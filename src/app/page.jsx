@@ -4,6 +4,8 @@ import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-
 import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
 // import Intro from "@/components/AnimeList/Intro";
 
+//testing
+
 const Page = async () => {
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
