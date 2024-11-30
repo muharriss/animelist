@@ -2,7 +2,6 @@ import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
 import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
-// import Intro from "@/components/AnimeList/Intro";
 
 const Page = async () => {
 
@@ -29,16 +28,7 @@ const Page = async () => {
 
   return (
     <div className=" w-full flex flex-col justify-center items-center gap-5">
-      {/* <div className="overflow-hidden rounded-md">
-        <img
-          src={upcoming.data[0].trailer.images.maximum_image_url} className="h-[50vh] w-screen max-w-[950px] object-cover "
-          alt={upcoming.data[0].trailer.images.large_image_url}
-       />
-      </div> */}
-      {/* <Intro upcoming={upcoming}/> */}
       <section className=" pt-3">
-        {/* <Header LinkHref={"/season"} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} /> */}
-        {/* <SeasonalAnime seasonNow={seasonAnime.data[0].season} yearNow = {seasonAnime.data[0].year}/> */}
         <SeasonalAnime />
       </section>
       {await delay(500)}
