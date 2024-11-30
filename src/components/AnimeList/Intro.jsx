@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 const Intro = ({ api, index }) => {
 
   const [isNext, setIsNext] = useState(false)
+  const [toggle, setToggle] = useState(false)
   useEffect(() => {
     try {
       setIsNext(true)
@@ -17,13 +18,14 @@ const Intro = ({ api, index }) => {
   }, [index])
 
   return (
-    <div className="overflow-hidden rounded-md mt-2 max-w-[950px] relative">
+    <div className="overflow-hidden rounded-md mt-2  max-w-[950px] relative">
 
       {api.data ?
         <img
           src={api.data[index].trailer.images.maximum_image_url} className="h-[50vh] w-screen  object-cover"
           alt={api.data[index].trailer.images.large_image_url}
-        /> : (<div className="h-[50vh] w-screen bg-gray-300  animate-pulse dark:bg-gray-700"/>)}
+        /> : ( <div className="h-[50vh] w-full bg-gray-300  animate-pulse dark:bg-gray-700 "/>)}
+       
       <div className="absolute top-0 h-full w-full bg-neutral-950/60 md:bg-transparent md:bg-gradient-to-r md:from-neutral-950/80" />
       {api.data && <div className={`absolute top-1/2 left-5 transform -translate-y-1/2 sm:left-14`}>
         <div className={`flex flex-col ${isNext ? "slide-in-left" : ""}`}>
