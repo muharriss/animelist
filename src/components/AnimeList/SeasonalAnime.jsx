@@ -5,6 +5,7 @@ import AnimeList from "."
 import { getAnimeResponse } from "@/libs/api-libs"
 import Header from "./Header"
 import { CaretDown } from "@phosphor-icons/react"
+import Intro from "./Intro"
 
 const SeasonalAnime = () => {
 
@@ -64,8 +65,22 @@ const SeasonalAnime = () => {
 
     useEffect(() => {
         fetchData()
-        // localStorage.removeItem('fall2024')
     }, [season])
+
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const nextIndex = () => {
+        setCurrentIndex(prev => prev + 1)
+        if(currentIndex == 3) {
+            setCurrentIndex(0)
+        } 
+    }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextIndex();
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [currentIndex]);
 
     useEffect(() => {
         localStorage.removeItem("upcomingPage")
@@ -74,6 +89,9 @@ const SeasonalAnime = () => {
 
     return (
         <>
+            <div className="px-3">
+                <Intro api={seasonalAnime} index={currentIndex}/>
+            </div>
             <Header LinkHref={`/season/${year}/${season}`} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} />
             {loading ? (
 

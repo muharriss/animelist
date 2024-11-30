@@ -4,8 +4,6 @@ import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-
 import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
 // import Intro from "@/components/AnimeList/Intro";
 
-//testing
-
 const Page = async () => {
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -33,8 +31,8 @@ const Page = async () => {
     <div className=" w-full flex flex-col justify-center items-center gap-5">
       {/* <div className="overflow-hidden rounded-md">
         <img
-          src={upcoming.data[2].trailer.images.maximum_image_url} className="h-[50vh] w-screen max-w-[950px] object-cover "
-          alt={upcoming.data[2].trailer.images.large_image_url}
+          src={upcoming.data[0].trailer.images.maximum_image_url} className="h-[50vh] w-screen max-w-[950px] object-cover "
+          alt={upcoming.data[0].trailer.images.large_image_url}
        />
       </div> */}
       {/* <Intro upcoming={upcoming}/> */}

@@ -73,6 +73,10 @@ const Page = async ({ params: { id } }) => {
                         <p className="w-32 border-r dark:border-[#333333]">Released</p>
                         <p className="pl-7">{detailAnime.data.aired.string}</p>
                     </div>
+                    <div className="flex border-b dark:border-[#333333] py-2">
+                        <p className="w-32 border-r dark:border-[#333333]">Studio</p>
+                        <p className="pl-7">{detailAnime.data.studios.map(studio => studio.name)}</p>
+                    </div>
                 </div>
                 <div className="py-7 pb-4">
                     <h1 className="font-bold text-xl border-l-4 border-[#1e88e5] pl-3 ">Characters</h1>
