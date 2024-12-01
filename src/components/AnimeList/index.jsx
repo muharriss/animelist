@@ -7,10 +7,26 @@ const AnimeList = ({ api }) => {
             {api.data?.map((anime, index) => {
                 return (
                     <div key={index} className="relative">
-                        <div className={`flex justify-center items-center gap-1 absolute right-0 bg-yellow-500 bg-opacity-[85%] m-1 p-1  rounded-md z-[5] ${!anime.score ? "hidden": "block"}`}>
-                            <p className="text-white">★</p>
-                            <p className="text-gray-200 text-sm">{anime.score}</p>
-                        </div>
+                        {
+                            //if there is no score and favorites, set null. if not, show component
+                            !anime.score && !anime.favorites ? null :
+                                (
+                                    //if there is score, show score. if not, show favorites.
+                                    anime.score ?
+                                        (
+                                            <div className="flex justify-center items-center gap-1 absolute right-0 bg-yellow-500 bg-opacity-[85%] m-1 p-1  rounded-md z-[5]">
+                                                <p className="text-white">★</p>
+                                                <p className="text-gray-200 text-sm">{anime.score}</p>
+                                            </div>
+                                        ) :
+                                        (
+                                            <div className="flex justify-center items-center gap-1 absolute right-0 bg-rose-400 bg-opacity-[85%] m-1 p-1  rounded-md z-[5]">
+                                                <p className="text-white text-sm">❤︎</p>
+                                                <p className="text-gray-200 text-sm">{anime.favorites}</p>
+                                            </div>
+                                        )
+                                )
+                        }
                         <Link href={`/anime/${anime.mal_id}`} className=" hover:text-[#1e88e5] transition-all pb-5 " >
                             <img
                                 src={anime.images.webp.image_url}
