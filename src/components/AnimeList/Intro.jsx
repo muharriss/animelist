@@ -1,6 +1,7 @@
 "use client"
 
 import { Heart, Star, Users } from "@phosphor-icons/react"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const Intro = ({ api, index }) => {
@@ -43,7 +44,7 @@ const Intro = ({ api, index }) => {
               <p className="text-neutral-50">{api.data[index].favorites}</p>
             </div>}
           </div>
-          <h1 className="text-neutral-50 font-bold text-[2rem] sm:text-[3rem] ">{api.data[index].title}</h1>
+          <Link href={`/anime/${api.data[index].mal_id}`} className="text-neutral-50 font-bold text-[2rem] sm:text-[3rem] ">{api.data[index].title}</Link>
           <h2 className="text-neutral-200 font-medium sm:text-[1rem]">
             {api.data[index].title_japanese}
           </h2>
