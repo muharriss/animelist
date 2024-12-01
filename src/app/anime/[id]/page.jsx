@@ -59,7 +59,7 @@ const Page = async ({ params: { id } }) => {
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Score</p>
-                        <p className="pl-7">{detailAnime.data.score? detailAnime.data.score : "N/A"}</p>
+                        <p className="pl-7">{detailAnime.data.score? detailAnime.data.score + " (" + detailAnime.data.scored_by + " users)": "N/A"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Total Episode</p>

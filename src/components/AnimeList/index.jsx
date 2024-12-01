@@ -21,7 +21,7 @@ const AnimeList = ({ api }) => {
                                         ) :
                                         (
                                             <div className="flex justify-center items-center gap-1 absolute right-0 bg-rose-400 bg-opacity-[85%] m-1 p-1  rounded-md z-[5]">
-                                                <p className="text-white text-sm">❤︎</p>
+                                                <p className="text-white">❤︎</p>
                                                 <p className="text-gray-200 text-sm">{anime.favorites}</p>
                                             </div>
                                         )
