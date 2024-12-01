@@ -82,7 +82,7 @@ const Page = async ({ params: { id } }) => {
                     <h1 className="font-bold text-xl border-l-4 border-[#1e88e5] pl-3 ">Characters</h1>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 justify-center py-2  pt-0">
-                    {charactersAnime.data.slice(0, 20).map((anime, index) => {
+                    {charactersAnime.data.sort((a, b) => b.favorites - a.favorites).slice(0, 20).map((anime, index) => {
                         return (
                             <div key={index} className="relative rounded-xl overflow-hidden ">
                                 <div className={`flex justify-center items-center gap-1 absolute right-0 ${anime.role == "Main" ? "bg-[#1e88e5]" : "bg-orange-400"} bg-opacity-[85%] m-1 p-1  rounded-md z-10`}>
