@@ -58,6 +58,7 @@ const InputSearch = ({ user }) => {
                     router.push(`/search/${searchValue}`)
                 }
             } finally {
+                setSearchValue("")
                 setToggleInput(!toggleInput)
             }
 
