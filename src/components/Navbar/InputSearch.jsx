@@ -51,17 +51,22 @@ const InputSearch = ({ user }) => {
 
         if (event.key === "Enter" || event.type === "click") {
             event.preventDefault();
-            if (searchValue.length == 0 || searchValue.trim() == "") {
+            try {
+                if (searchValue.length == 0 || searchValue.trim() == "") {
+                    setToggleInput(!toggleInput)
+                } else {
+                    router.push(`/search/${searchValue}`)
+                }
+            } finally {
                 setToggleInput(!toggleInput)
-            } else {
-                router.push(`/search/${searchValue}`)
             }
+
         }
     }
 
     return (
         <div className="flex items-center gap-2 ">
-            <input placeholder="cari anime..." onKeyDown={handleSearch} className={`shadow-sm border-2 w-48 md:w-auto dark:border-[#333333] rounded-md outline-none p-2 dark:bg-[#121212] ${toggleInput ? "block" : "hidden"}`} onChange={e => setSearchValue(e.target.value)} />
+            <input placeholder="cari anime..." onKeyDown={handleSearch} value={searchValue} className={`shadow-sm border-2 w-48 md:w-auto dark:border-[#333333] rounded-md outline-none p-2 dark:bg-[#121212] ${toggleInput ? "block" : "hidden"}`} onChange={e => setSearchValue(e.target.value)} />
             <MagnifyingGlass size={28} weight="thin" onClick={handleSearch} className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
             {
                 resolvedTheme === "light"
