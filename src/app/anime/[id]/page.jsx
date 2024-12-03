@@ -5,6 +5,7 @@ import BookmarkBtn from "@/components/AnimeList/BookmarkBtn"
 import { authUserSession } from "@/libs/auth-libs"
 import CollectionBtn from "@/components/AnimeList/CollectionBtn"
 import prisma from "@/libs/prisma"
+import Link from "next/link"
 // import Notif from "@/components/AnimeList/Notif"
 
 const Page = async ({ params: { id } }) => {
@@ -50,16 +51,16 @@ const Page = async ({ params: { id } }) => {
                 <div className="pt-4 ">
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">English</p>
-                        <p className="pl-7 hidden sm:block">{detailAnime.data.title_english? detailAnime.data.title_english: "-"}</p>
+                        <p className="pl-7 hidden sm:block">{detailAnime.data.title_english ? detailAnime.data.title_english : "-"}</p>
                         <p className="pl-7 block sm:hidden">{detailAnime.data.title_english?.length > 20 ? detailAnime.data.title_english.slice(0, 20) + "..." : detailAnime.data.title_english}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Type</p>
-                        <p className="pl-7">{detailAnime.data.type ? detailAnime.data.type: "Unknown"}</p>
+                        <p className="pl-7">{detailAnime.data.type ? detailAnime.data.type : "Unknown"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Score</p>
-                        <p className="pl-7">{detailAnime.data.score? detailAnime.data.score + " (" + detailAnime.data.scored_by + " users)": "N/A"}</p>
+                        <p className="pl-7">{detailAnime.data.score ? detailAnime.data.score + " (" + detailAnime.data.scored_by + " users)" : "N/A"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Total Episode</p>
@@ -67,7 +68,19 @@ const Page = async ({ params: { id } }) => {
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Genre</p>
-                        <p className="pl-7">{detailAnime.data.genres.length > 0 ? detailAnime.data.genres.map(genre => genre.name).join(", ") : "Unknown"}</p>
+                        <p className="pl-7">
+                            {detailAnime.data.genres.length > 0 ?
+                                detailAnime.data.genres
+                                    .map((genre, index) =>
+                                        <span key={genre.mal_id}>
+                                            <Link href={`/genre/${genre.mal_id}/${genre.name}`} className="text-[#1e88e5]">
+                                                {genre.name}
+                                            </Link>
+                                            {index < detailAnime.data.genres.length - 1 && ", "}
+                                        </span>
+                                    )
+                                : "Unknown"}
+                        </p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Released</p>
@@ -75,7 +88,7 @@ const Page = async ({ params: { id } }) => {
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
                         <p className="w-32 border-r dark:border-[#333333]">Studio</p>
-                        <p className="pl-7">{detailAnime.data.studios.length > 0 ? detailAnime.data.studios.map(studio => studio.name): "Unknown"}</p>
+                        <p className="pl-7">{detailAnime.data.studios.length > 0 ? detailAnime.data.studios.map(studio => studio.name) : "Unknown"}</p>
                     </div>
                 </div>
                 <div className="py-7 pb-4">

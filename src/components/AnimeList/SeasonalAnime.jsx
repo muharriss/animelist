@@ -70,9 +70,9 @@ const SeasonalAnime = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const nextIndex = () => {
         setCurrentIndex(prev => prev + 1)
-        if(currentIndex == 3) {
+        if (currentIndex == 3) {
             setCurrentIndex(0)
-        } 
+        }
     }
 
     useEffect(() => {
@@ -85,12 +85,18 @@ const SeasonalAnime = () => {
     useEffect(() => {
         localStorage.removeItem("upcomingPage")
         localStorage.removeItem("populerPage")
+        
+        Object.keys(localStorage).forEach((key) => {
+            if (key.includes("genre")) {
+                localStorage.removeItem(key);
+            }
+        })
     }, [])
 
     return (
         <>
             <div className="px-3">
-                <Intro api={seasonalAnime} index={currentIndex}/>
+                <Intro api={seasonalAnime} index={currentIndex} />
             </div>
             <Header LinkHref={`/season/${year}/${season}`} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} />
             {loading ? (
