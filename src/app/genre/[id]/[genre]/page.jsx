@@ -16,7 +16,7 @@ const Page = ({params: {id, genre}}) => {
     useEffect(() => {
         // Mengatur nilai page dari localStorage saat komponen di-mount di klien
         if (typeof window !== "undefined") {
-            const savedPage = parseInt(localStorage.getItem(`genre${genre}`)) || 1;
+            const savedPage = parseInt(localStorage.getItem(`${genre}Page`)) || 1;
             setPage(savedPage);
             setIsMounted(true);
         }
@@ -30,7 +30,7 @@ const Page = ({params: {id, genre}}) => {
     useEffect(() => {
         if (isMounted) {
             fetchData();
-            localStorage.setItem(`genre${genre}`, page);
+            localStorage.setItem(`${genre}Page`, page);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, isMounted]);
