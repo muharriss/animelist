@@ -110,7 +110,7 @@ const Page = async ({ params: { id } }) => {
                                 // priority
                                 />
                                 <div className="absolute h-full w-full bg-gradient-to-t from-neutral-900 via-transparent top-0" />
-                                <p className="absolute bottom-2 left-1 ">{anime.character.name}</p>
+                                <p className="absolute bottom-2 left-1 text-neutral-50 ">{anime.character.name}</p>
                             </div>
 
                         )

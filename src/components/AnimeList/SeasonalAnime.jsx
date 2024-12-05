@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import AnimeList from "."
 import { getAnimeResponse } from "@/libs/api-libs"
 import Header from "./Header"
-import { CaretDown } from "@phosphor-icons/react"
+import { CaretDown, CaretUp } from "@phosphor-icons/react"
 import Intro from "./Intro"
 
 const SeasonalAnime = () => {
@@ -90,6 +90,7 @@ const SeasonalAnime = () => {
             if (key.includes("Page")) {
                 localStorage.removeItem(key);
             }
+            localStorage.removeItem("shortedBy")
         })
     }, [])
 
@@ -141,7 +142,11 @@ const SeasonalAnime = () => {
                                 }} key={`${index}`} className={`capitalize ${season == seasonalAnime.data[0].season && year == seasonalAnime.data[0].year ? "opacity-[100%] sm:pointer-events-none" : "opacity-[50%] hidden sm:block"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}>
                                     <div className="flex justify-center items-center gap-2">
                                         <p>{`${season} ${year}`}</p>
-                                        <CaretDown className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
+                                        {toggleSeason ? (
+                                            <CaretUp className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
+                                        ): (
+                                            <CaretDown className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
+                                        )}
                                     </div>
                                 </button>
                             )
