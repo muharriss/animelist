@@ -21,7 +21,7 @@ const HeaderMenuGenre = ({ title, shortedBy, setShortedBy, dataLength }) => {
                     </div>
                 }
                 {toggleSort && (
-                    <div className="flex flex-col right-0 pl-3 items-start absolute bg-gray-100 dark:bg-[#121212] rounded-lg p-2 z-10 border-2 border-gray-500 mt-2  text-sm">
+                    <div className="flex flex-col right-0 pl-3 items-start absolute bg-gray-100 dark:bg-[#121212] rounded-lg p-2 z-10 border-2 border-gray-500 mt-2  sm:text-sm">
                         {shortList.map((list, index) => {
                             return (
                                 <div key={index}>
