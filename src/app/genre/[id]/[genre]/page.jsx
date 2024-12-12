@@ -12,6 +12,8 @@ const Page = ({ params: { id, genre } }) => {
     const [shortedBy, setShortedBy] = useState("members")
     const [animeGenre, setAnimeGenre] = useState([]);
 
+    genre = decodeURI(genre)
+
     useEffect(() => {
         // Mengatur nilai page dari localStorage saat komponen di-mount di klien
         if (typeof window !== "undefined") {
