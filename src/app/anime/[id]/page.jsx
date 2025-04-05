@@ -6,6 +6,7 @@ import { authUserSession } from "@/libs/auth-libs"
 import CollectionBtn from "@/components/AnimeList/CollectionBtn"
 import prisma from "@/libs/prisma"
 import Link from "next/link"
+import MoreDetailAnimeInfo from "@/components/AnimeList/MoreDetailAnimeInfo"
 // import Notif from "@/components/AnimeList/Notif"
 
 const Page = async ({ params: { id } }) => {
@@ -67,7 +68,7 @@ const Page = async ({ params: { id } }) => {
                         <p className="pl-7">{detailAnime.data.episodes ? detailAnime.data.episodes : "Unknown"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Genre</p>
+                        <p className="w-32 border-r dark:border-[#333333]">Genres</p>
                         <p className="pl-7">
                             {detailAnime.data.genres.length > 0 ?
                                 detailAnime.data.genres
@@ -87,11 +88,29 @@ const Page = async ({ params: { id } }) => {
                         <p className="pl-7">{detailAnime.data.aired.string}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Studio</p>
-                        <p className="pl-7">{detailAnime.data.studios.length > 0 ? detailAnime.data.studios.map(studio => studio.name) : "Unknown"}</p>
+                        <p className="w-32 border-r dark:border-[#333333]">Studios</p>
+                        <p className="pl-7">{detailAnime.data.studios.length > 0 ?
+                            detailAnime.data.studios
+                                .map((studio, index) => {
+                                    return (
+                                        <span key={studio.mal_id}>
+                                            <Link href={`/producer/${studio.mal_id}/${studio.name}`} className="text-[#1e88e5]">
+                                                {studio.name}
+                                            </Link>
+                                            {index < detailAnime.data.studios.length - 1 && ", "}
+                                        </span>
+                                    )
+                                })
+                            : "Unknown"}
+                        </p>
                     </div>
+                    <div className="flex border-b dark:border-[#333333] py-2">
+                        <p className="w-32 border-r dark:border-[#333333]">Source</p>
+                        <p className="pl-7">{detailAnime.data.source ? detailAnime.data.source : "Unknown"}</p>
+                    </div>
+                    <MoreDetailAnimeInfo detailAnime={detailAnime} />
                 </div>
-                <div className="py-7 pb-4">
+                <div className="pt-2 pb-4">
                     <h1 className="font-bold text-xl border-l-4 border-[#1e88e5] pl-3 ">Characters</h1>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 justify-center py-2  pt-0">

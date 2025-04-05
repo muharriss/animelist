@@ -1,5 +1,6 @@
 "use client"
 
+// import { createCollection } from "@/libs/action"
 import { BookmarkSimple, X } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -44,6 +45,18 @@ const CollectionBtn = ({ anime_mal_id, anime_image, anime_title, user_email, isC
                 // setIsVisible(true); // Tampilkan teks
                 // setTimeout(() => setIsVisible(false), 1500);
             }
+
+            // const collection = await createCollection(data)
+            // if ( collection.success == true) {
+            //     setIsCreated(true)
+            //     setLoading(false)
+            //     router.refresh()
+
+            // }else {
+            //     alert("error cuy")
+            //     setLoading(false)
+            // }
+
         } else {
 
             const data = { anime_mal_id, user_email }

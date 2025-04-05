@@ -22,7 +22,7 @@ const Intro = ({ api, index }) => {
 
       {api.data ?
         <img
-          src={api.data[index].trailer.images.maximum_image_url} className="h-[50vh] w-screen  object-cover"
+          src={api.data[index].trailer.images.maximum_image_url ? api.data[index].trailer.images.maximum_image_url: api.data[index].images.webp.large_image_url} className="h-[50vh] w-screen  object-cover"
           alt={api.data[index].trailer.images.large_image_url}
         /> : (<div className="h-[50vh] w-full bg-gray-300  animate-pulse dark:bg-gray-700 " />)}
 
