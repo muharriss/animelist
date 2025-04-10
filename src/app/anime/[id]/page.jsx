@@ -7,6 +7,7 @@ import CollectionBtn from "@/components/AnimeList/CollectionBtn"
 import prisma from "@/libs/prisma"
 import Link from "next/link"
 import MoreDetailAnimeInfo from "@/components/AnimeList/MoreDetailAnimeInfo"
+import CharactersSection from "@/components/AnimeList/CharactersSection"
 // import Notif from "@/components/AnimeList/Notif"
 
 const Page = async ({ params: { id } }) => {
@@ -35,8 +36,8 @@ const Page = async ({ params: { id } }) => {
                     />
 
                     <div className="pt-6 w-full">
-                        <div className="flex justify-between items-center py-2">
-                            <p className="pb-1 font-bold text-xl">{detailAnime.data.title}</p>
+                        <div className="flex justify-between items-center py-2 gap-3">
+                            <p className={`pb-1 font-bold text-xl  ${detailAnime.data.title.trim().split(/\s+/).length < 2 ? "break-all" : ""}`}>{detailAnime.data.title}</p>
                             {
                                 user
                                     ?
@@ -51,24 +52,24 @@ const Page = async ({ params: { id } }) => {
                 </div>
                 <div className="pt-4 ">
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">English</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">English</p>
                         <p className="pl-7 hidden sm:block">{detailAnime.data.title_english ? detailAnime.data.title_english : "-"}</p>
-                        <p className="pl-7 block sm:hidden">{detailAnime.data.title_english?.length > 20 ? detailAnime.data.title_english.slice(0, 20) + "..." : detailAnime.data.title_english}</p>
+                        <p className="pl-7 block sm:hidden">{detailAnime.data.title_english?.length > 20 ? detailAnime.data.title_english.slice(0, 20) + "..." : detailAnime.data.title_english ? detailAnime.data.title_english : "-"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Type</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Type</p>
                         <p className="pl-7">{detailAnime.data.type ? detailAnime.data.type : "Unknown"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Score</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Score</p>
                         <p className="pl-7">{detailAnime.data.score ? detailAnime.data.score + " (" + detailAnime.data.scored_by + " users)" : "N/A"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Total Episode</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Total Episode</p>
                         <p className="pl-7">{detailAnime.data.episodes ? detailAnime.data.episodes : "Unknown"}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Genres</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Genres</p>
                         <p className="pl-7">
                             {detailAnime.data.genres.length > 0 ?
                                 detailAnime.data.genres
@@ -84,11 +85,11 @@ const Page = async ({ params: { id } }) => {
                         </p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Released</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Released</p>
                         <p className="pl-7">{detailAnime.data.aired.string}</p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Studios</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Studios</p>
                         <p className="pl-7">{detailAnime.data.studios.length > 0 ?
                             detailAnime.data.studios
                                 .map((studio, index) => {
@@ -105,36 +106,15 @@ const Page = async ({ params: { id } }) => {
                         </p>
                     </div>
                     <div className="flex border-b dark:border-[#333333] py-2">
-                        <p className="w-32 border-r dark:border-[#333333]">Source</p>
+                        <p className="min-w-32 border-r dark:border-[#333333]">Source</p>
                         <p className="pl-7">{detailAnime.data.source ? detailAnime.data.source : "Unknown"}</p>
                     </div>
                     <MoreDetailAnimeInfo detailAnime={detailAnime} />
                 </div>
-                <div className="pt-2 pb-4">
+                <div className="py-4">
                     <h1 className="font-bold text-xl border-l-4 border-[#1e88e5] pl-3 ">Characters</h1>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 justify-center py-2  pt-0">
-                    {charactersAnime.data.sort((a, b) => b.favorites - a.favorites).slice(0, 20).map((anime, index) => {
-                        return (
-                            <div key={index} className="relative rounded-xl overflow-hidden ">
-                                <div className={`flex justify-center items-center gap-1 absolute right-0 ${anime.role == "Main" ? "bg-[#1e88e5]" : "bg-orange-400"} bg-opacity-[85%] m-1 p-1  rounded-md z-10`}>
-                                    <p className="text-gray-200 text-sm">{anime.role}</p>
-                                </div>
-                                <img
-                                    src={anime.character.images.webp.image_url}
-                                    alt={anime.character.images.jpg.image_url}
-                                    width={1000}
-                                    height={1000}
-                                    className=" max-h-52 sm:max-h-72 object-cover "
-                                // priority
-                                />
-                                <div className="absolute h-full w-full bg-gradient-to-t from-neutral-900 via-transparent top-0" />
-                                <p className="absolute bottom-2 left-1 text-neutral-50 ">{anime.character.name}</p>
-                            </div>
-
-                        )
-                    })}
-                </div>
+                <CharactersSection charactersAnime={charactersAnime} />
                 <div className="mt-4">
                     <VideoPlayer youtubeId={detailAnime.data.trailer.youtube_id} />
                 </div>
