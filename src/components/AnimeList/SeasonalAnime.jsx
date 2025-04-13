@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import AnimeList from "."
 import { getAnimeResponse } from "@/libs/api-libs"
 import Header from "./Header"
-import { CaretDown, CaretUp } from "@phosphor-icons/react"
+import { CaretDown, CaretUp, DotsThree } from "@phosphor-icons/react"
 import Intro from "./Intro"
 
 const SeasonalAnime = () => {
@@ -37,6 +37,20 @@ const SeasonalAnime = () => {
     const [season, setSeason] = useState(`${defaultSeason}`)
     const [loading, setLoading] = useState(false)
     const [toggleSeason, setToggleSeason] = useState(false)
+    const [listStart, setListStart] = useState(0)
+    const [listEnd, setListEnd] = useState(4)
+
+    const handlePrevSeasonListBtn = () => {
+        setListStart(prev => prev + 4)
+        setListEnd(prev => prev + 4)
+        setYear(prev => prev - 1)
+    }
+
+    const handleNextSeasonListBtn = () => {
+        setListStart(prev => prev == 0 ? 0 : prev - 4)
+        setListEnd(prev => prev == 4 ? 4 : prev - 4)
+        setYear(prev => prev == defaultYear ? defaultYear : prev + 1)
+    }
 
     const fetchData = async () => {
         setLoading(true)
@@ -65,7 +79,7 @@ const SeasonalAnime = () => {
 
     useEffect(() => {
         fetchData()
-    }, [season])
+    }, [season, year])
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const nextIndex = () => {
@@ -85,7 +99,7 @@ const SeasonalAnime = () => {
     useEffect(() => {
         // localStorage.removeItem("upcomingPage")
         // localStorage.removeItem("populerPage")
-        
+
         Object.keys(localStorage).forEach((key) => {
             if (key.includes("Page")) {
                 localStorage.removeItem(key);
@@ -130,7 +144,8 @@ const SeasonalAnime = () => {
             ) : (
                 <div>
                     <div className="flex gap-6 pl-3 ">
-                        {seasonList.slice(0, 4).reverse().map(({ season, year }, index) => {
+                        <DotsThree size={32} className="cursor-pointer hidden sm:block hover:text-[#1e88e5] transition-all" onClick={handlePrevSeasonListBtn} />
+                        {seasonList.slice(listStart, listEnd).reverse().map(({ season, year }, index) => {
                             return (
                                 <button onClick={() => {
                                     setSeason(season)
@@ -144,16 +159,20 @@ const SeasonalAnime = () => {
                                         <p>{`${season} ${year}`}</p>
                                         {toggleSeason ? (
                                             <CaretUp className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
-                                        ): (
+                                        ) : (
                                             <CaretDown className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
                                         )}
                                     </div>
                                 </button>
                             )
                         })}
+                        {year != defaultYear && (
+                            <DotsThree size={32} className="cursor-pointer hidden sm:block hover:text-[#1e88e5] transition-all" onClick={handleNextSeasonListBtn} />
+                        )}
                     </div>
                     {toggleSeason && (
                         <div className="flex flex-col  sm:hidden pl-3 items-start absolute bg-gray-100 dark:bg-[#121212] rounded-lg p-2 z-10 border-2 border-gray-500 mt-2 ml-2 ">
+                            <DotsThree size={32} className="cursor-pointer hover:text-[#1e88e5] transition-all" onClick={handlePrevSeasonListBtn} />
                             {seasonList.slice(0, 4).reverse().map(({ season, year }, index) => {
                                 return (
                                     <button onClick={() => {
@@ -165,6 +184,9 @@ const SeasonalAnime = () => {
                                     </button>
                                 )
                             })}
+                            {year != defaultYear && (
+                                <DotsThree size={32} className="cursor-pointer hover:text-[#1e88e5] transition-all" onClick={handleNextSeasonListBtn} />
+                            )}
                         </div>
                     )}
                     <AnimeList api={seasonalAnime} />
