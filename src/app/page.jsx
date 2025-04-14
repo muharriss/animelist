@@ -28,21 +28,21 @@ const Page = async () => {
 
   return (
     <div className=" w-full  flex flex-col justify-center items-center gap-5">
-      <section className=" pt-3">
+      <section className=" pt-3 w-full max-w-5xl">
         <SeasonalAnime />
       </section>
       {await delay(500)}
-      <section className="">
+      <section className="w-full max-w-5xl">
         <Header LinkHref={"/upcoming"} title={"Akan Datang"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={upcoming} />
       </section>
       {await delay(500)}
-      <section className="">
+      <section className="w-full max-w-5xl">
         <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={topAnime} />
       </section>
       {await delay(500)}
-      <section className="pb-5">
+      <section className="pb-5 w-full max-w-5xl">
         <Header title={"Rekomendasi"} />
         {recommendedAnime.data?.length < 1 || recommendedAnime == undefined ? (
           <p>Something went wrong!</p>

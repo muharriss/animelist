@@ -36,7 +36,7 @@ const Page = () => {
 
     return (
         <div className=" w-full flex flex-col justify-center items-center">
-            <div className="max-w-5xl">
+            <div className="w-full max-w-5xl">
                 <Header title="My Collection" />
                 {
                     bookmarks == undefined || bookmarks.length == 0

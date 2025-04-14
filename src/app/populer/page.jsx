@@ -39,7 +39,7 @@ const Page = () => {
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
-            <section className="max-w-5xl">
+            <section className="w-full max-w-5xl">
                 <HeaderMenu title={`Anime Teratas #${page}`} />
                 <AnimeList api={topAnime} />
                 <Pagination setPage={setPage} page={page} lastPage={topAnime.pagination?.last_visible_page} />

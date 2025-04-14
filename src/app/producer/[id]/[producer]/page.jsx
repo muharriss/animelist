@@ -44,7 +44,7 @@ const Page = ({ params: { id, producer } }) => {
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
-            <section className="">
+            <section className="w-full max-w-5xl">
                 <HeaderMenuGenre title={`${producer} Anime #${page}`} shortedBy={shortedBy} setShortedBy={setShortedBy} dataLength={animeProduser?.data?.length}/>
                 <AnimeList api={animeProduser} />
                 <Pagination setPage={setPage} page={page} lastPage={animeProduser.pagination?.last_visible_page} />

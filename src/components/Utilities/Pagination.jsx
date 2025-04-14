@@ -56,7 +56,7 @@ const Pagination = ({ setPage, page, lastPage }) => {
                     : null
                 }
                 <div className="flex gap-2">
-                    <input type="number" min="1" onKeyDown={handleSearchPage} value={searchPageValue} placeholder={page} onChange={e => setSearchPageValue(e.target.value)} className="p-1 text-center w-16 rounded-md" />
+                    <input type="number" min="1" onKeyDown={handleSearchPage} value={searchPageValue} placeholder={page} onChange={e => setSearchPageValue(e.target.value)} className="p-1 text-center w-16 rounded-md bg-gray-200 dark:bg-black " />
                     <button disabled={searchPageValue == NaN || searchPageValue < 1 || searchPageValue > lastPage ? true : false} onClick={handleSearchPage}>Go</button>
                 </div>
             </div>

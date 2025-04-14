@@ -24,7 +24,7 @@ const Page = async ({ params: { id } }) => {
     return (
         <div className="w-full flex flex-col justify-center items-center p-5">
             {/* <Notif notif_text={"Berhasil ditambahkan di Local"} isVisible={true}/> */}
-            <div className="max-w-2xl">
+            <div className="w-full max-w-2xl">
                 <div className="flex flex-col justify-center items-center pt-4">
                     <img
                         src={detailAnime.data.images.webp.large_image_url}

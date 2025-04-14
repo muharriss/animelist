@@ -10,7 +10,7 @@ const Page = async ({ params }) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <section className="max-w-5xl">
+      <section className="w-full max-w-5xl">
         <Header title={`Pencarian Untuk ${decodedKeyword}...`} />
         <AnimeList api={searcAnime} />
       </section>
