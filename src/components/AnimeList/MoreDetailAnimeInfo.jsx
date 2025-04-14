@@ -1,6 +1,7 @@
 "use client"
 
-import { CaretDoubleDown, CaretDoubleUp} from "@phosphor-icons/react"
+import { CaretDoubleDown, CaretDoubleUp } from "@phosphor-icons/react"
+import Link from "next/link"
 import { useState } from "react"
 
 const MoreDetailAnimeInfo = ({ detailAnime }) => {
@@ -12,7 +13,7 @@ const MoreDetailAnimeInfo = ({ detailAnime }) => {
             <div
                 className={`flex flex-col justify-center items-center text-center w-full mt-3 text-sm   ${isActive ? "hidden" : "block"}`}
             >
-                <CaretDoubleDown size={20} onClick={() => setIsActive(true)} className="cursor-pointer"/>
+                <CaretDoubleDown size={20} onClick={() => setIsActive(true)} className="cursor-pointer" />
             </div>
             <div className={`${isActive ? "block" : "hidden"}`}>
                 <div className="flex border-b dark:border-[#333333] py-2">
@@ -21,7 +22,13 @@ const MoreDetailAnimeInfo = ({ detailAnime }) => {
                 </div>
                 <div className="flex border-b dark:border-[#333333] py-2">
                     <p className="min-w-32 border-r dark:border-[#333333]">Premiered</p>
-                    <p className="pl-7 capitalize">{detailAnime.data.season ? detailAnime.data.season + " " + detailAnime.data.year  : "Unknown"}</p>
+                    <div className="pl-7" >
+                        {detailAnime.data.season ? (
+                            <Link href={`/season/${detailAnime.data.year}/${detailAnime.data.season}`} className=" capitalize text-[#1e88e5]">{ detailAnime.data.season + " " + detailAnime.data.year}</Link>
+                        ) : (
+                            <p>Unknown</p>
+                        )}
+                    </div>
                 </div>
                 <div className="flex border-b dark:border-[#333333] py-2">
                     <p className="min-w-32 border-r dark:border-[#333333]">Broadcast</p>
@@ -36,7 +43,7 @@ const MoreDetailAnimeInfo = ({ detailAnime }) => {
                     <p className="pl-7">{detailAnime.data.rating ? detailAnime.data.rating : "Unknown"}</p>
                 </div>
                 <div
-                    
+
                     className={`flex flex-col justify-center items-center text-center w-full mt-3 text-sm   ${isActive ? "block" : "hidden"}`}
                 >
                     <CaretDoubleUp size={20} className="cursor-pointer" onClick={() => setIsActive(false)} />
