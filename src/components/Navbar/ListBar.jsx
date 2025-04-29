@@ -20,12 +20,13 @@ const ListBar = ({ user }) => {
             <div className="p-6 w-1/2 h-screen bg-white dark:bg-[#121212] ">
                 <button onClick={handleClose} className="float-right text-xl dark:hover:bg-gray-700 rounded transition-all px-1">X</button>
                 <div className="flex flex-col">
+                    <Link href={"/manga"} onClick={handleClose} className="hover:text-[#1e88e5] transition-all pb-4 pt-6 ">Manga page</Link>
                     {
                         user
                             ?
-                            <Link href="/users/dashboard/collection" onClick={handleClose} className="pb-4 pt-6 hover:text-[#1e88e5] transition-all">Collection</Link>
+                            <Link href="/users/dashboard/collection" onClick={handleClose} className="pb-4 hover:text-[#1e88e5] transition-all">Collection</Link>
                             :
-                            <Link href="/anime/collection" onClick={handleClose} className="pb-4 pt-6 hover:text-[#1e88e5] transition-all">Collection</Link>
+                            <Link href="/anime/collection" onClick={handleClose} className="pb-4 hover:text-[#1e88e5] transition-all">Collection</Link>
 
                     }
                     {
