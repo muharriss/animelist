@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import AnimeList from "."
 import { getAnimeResponse } from "@/libs/api-libs"
 import Header from "./Header"
-import { CaretDown, CaretUp, DotsThree } from "@phosphor-icons/react"
+import { CaretUpDown, DotsThree } from "@phosphor-icons/react"
 import Intro from "./Intro"
+import Skeleton from "./Skeleton"
 
 const SeasonalAnime = () => {
 
@@ -113,37 +114,12 @@ const SeasonalAnime = () => {
             <div className="px-3">
                 <Intro api={seasonalAnime} index={currentIndex} />
             </div>
-            <Header LinkHref={`/season/${year}/${season}`} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} />
+            <Header LinkHref={`/anime/season/${year}/${season}`} title={"Seasonal Anime"} LinkTitle={"Lihat semua..."} />
             {loading ? (
-
-                //skeleton
-                <div className="mb-4">
-                    <div className="flex gap-6 ml-3 mt-2 mb-2">
-                        <div className="h-3 w-24 mr-3 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700" />
-                        <div className="h-3 w-16 mr-1 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 hidden sm:block" />
-                        <div className="h-3 w-24 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 hidden sm:block" />
-                        <div className="h-3 w-20 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 hidden sm:block" />
-
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center  pb-0 p-3 overflow-hidden">
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="h-52 sm:h-80 w-full bg-gray-300 rounded-md animate-pulse dark:bg-gray-700" />
-                            <div className="h-3 w-32 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 mt-3" />
-                        </div>
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="h-52 sm:h-80  w-full bg-gray-300 rounded-md animate-pulse dark:bg-gray-700" />
-                            <div className="h-3 w-28 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 mt-3" />
-                        </div>
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="h-52 sm:h-80  w-full bg-gray-300 rounded-md animate-pulse dark:bg-gray-700" />
-                            <div className="h-3 w-24 bg-gray-300 rounded-full animate-pulse dark:bg-gray-700 mt-3" />
-                        </div>
-                        <div className="h-52 sm:h-80 w-56  bg-gray-300 rounded-md animate-pulse dark:bg-gray-700" />
-                    </div>
-                </div>
+                <Skeleton />
             ) : (
                 <div>
-                    <div className="flex gap-6 pl-3 ">
+                    <div className="hidden sm:flex gap-6 pl-3   ">
                         <DotsThree size={32} className="cursor-pointer hidden sm:block hover:text-[#1e88e5] transition-all" onClick={handlePrevSeasonListBtn} />
                         {seasonList.slice(listStart, listEnd).reverse().map(({ season, year }, index) => {
                             return (
@@ -153,16 +129,20 @@ const SeasonalAnime = () => {
                                     if (season == seasonalAnime.data[0].season && year == seasonalAnime.data[0].year) {
                                         setToggleSeason(!toggleSeason)
                                     }
-                                    // localStorage.removeItem(`${season}${year}`)
-                                }} key={`${index}`} className={`capitalize ${season == seasonalAnime.data[0]?.season && year == seasonalAnime.data[0]?.year ? "opacity-[100%] sm:pointer-events-none" : "opacity-[50%] hidden sm:block"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}>
+                                }}
+                                    key={`${index}`}
+                                    className={`capitalize ${season == seasonalAnime.data[0]?.season && year == seasonalAnime.data[0]?.year ? "opacity-[100%] sm:pointer-events-none" : "opacity-[50%] hidden sm:block"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}
+                                >
+
                                     <div className="flex justify-center items-center gap-2">
                                         <p>{`${season} ${year}`}</p>
                                         {toggleSeason ? (
-                                            <CaretUp className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
+                                            <CaretUpDown size={16} className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
                                         ) : (
-                                            <CaretDown className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
+                                            <CaretUpDown size={16} className="sm:hidden" onClick={() => setToggleSeason(!toggleSeason)} />
                                         )}
                                     </div>
+
                                 </button>
                             )
                         })}
@@ -170,25 +150,46 @@ const SeasonalAnime = () => {
                             <DotsThree size={32} className="cursor-pointer hidden sm:block hover:text-[#1e88e5] transition-all" onClick={handleNextSeasonListBtn} />
                         )}
                     </div>
+
+                    <div className="px-3 sm:hidden ">
+                        <button onClick={() => setToggleSeason(!toggleSeason)} className="flex justify-between items-center w-full gap-6 border border-gray-500 px-2 py-1 rounded-md">
+                            <p>{`${season} ${year}`}</p>
+                            <CaretUpDown size={16} className="sm:hidden" />
+                        </button>
+                    </div>
+
                     {toggleSeason && (
-                        <div className="flex flex-col  sm:hidden pl-3 items-start absolute bg-gray-100 dark:bg-[#121212] rounded-lg p-2 z-10 border-2 border-gray-500 mt-2 ml-2 ">
-                            <DotsThree size={32} className="cursor-pointer hover:text-[#1e88e5] transition-all" onClick={handlePrevSeasonListBtn} />
-                            {seasonList.slice(0, 4).reverse().map(({ season, year }, index) => {
-                                return (
-                                    <button onClick={() => {
-                                        setSeason(season)
-                                        setYear(year)
-                                        // localStorage.removeItem(`${season}${year}`)
-                                    }} key={`${index}`} className={`capitalize ${season == seasonalAnime.data[0]?.season && year == seasonalAnime.data[0]?.year ? "opacity-[100%] text-[#1e88e5] w-full text-left" : "opacity-[100%]"} hover:text-[#1e88e5] hover:opacity-[100%] transition-all`}>
-                                        <p>{`${season} ${year}`}</p>
+                        <div className="w-full flex justify-center items-center relative">
+                            <div className="flex flex-col w-[95%]  sm:hidden mt-2 py-3 px-1 gap-1 top-0 text-lg items-start absolute bg-gray-100 dark:bg-[#121212] rounded-md  z-10 border border-gray-500">
+                              
+                                <button onClick={handlePrevSeasonListBtn} className="px-1 py-[0.17rem] w-full rounded-sm hover:dark:bg-neutral-300/5 hover:bg-neutral-300">
+                                    <DotsThree size={32} className=" cursor-pointer hover:text-[#1e88e5] transition-all" />
+                                </button>
+
+                                {seasonList.slice(listStart, listEnd).reverse().map(({ season, year }, index) => {
+                                    return (
+                                        <button
+                                            onClick={() => {
+                                                setSeason(season)
+                                                setYear(year)
+                                            }}
+                                            key={index}
+                                            className={`w-full text-left px-2 py-1 rounded-sm hover:dark:bg-neutral-300/5 hover:bg-neutral-300  ${season == seasonalAnime.data[0]?.season && year == seasonalAnime.data[0]?.year && "bg-neutral-300 dark:bg-neutral-300/5"}`}
+                                        >
+                                            {`${season} ${year}`}
+                                        </button>
+                                    )
+                                })}
+
+                                {year != defaultYear && (
+                                    <button onClick={handleNextSeasonListBtn} className="px-1 py-[0.17rem] w-full rounded-sm hover:dark:bg-neutral-300/5 hover:bg-neutral-300">
+                                        <DotsThree size={32} className="cursor-pointer hover:text-[#1e88e5] transition-all" />
                                     </button>
-                                )
-                            })}
-                            {year != defaultYear && (
-                                <DotsThree size={32} className="cursor-pointer hover:text-[#1e88e5] transition-all" onClick={handleNextSeasonListBtn} />
-                            )}
+                                )}
+                            </div>
                         </div>
                     )}
+
                     <AnimeList api={seasonalAnime} />
                 </div>
             )}

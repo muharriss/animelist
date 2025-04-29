@@ -22,7 +22,9 @@
   }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -53,6 +55,7 @@ img:hover {
     transform: translateX(60%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0%);
     opacity: 1;
@@ -79,7 +82,20 @@ img:hover {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
-} 
+}
+
+@media (min-width: 768px) {
+  .selectLabel {
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 815px) {
+  .selectLabel {
+    @apply bg-white/90 dark:bg-[#1e1e1e]/90  ;
+  }
+}

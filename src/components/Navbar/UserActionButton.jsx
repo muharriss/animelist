@@ -10,6 +10,7 @@ const UserActionButton = async () => {
 
     return (
         <div className="hidden gap-3 sm:flex text-nowrap w-0">
+            <Link href={"/manga"} className="hover:text-[#1e88e5] transition-all">Manga page</Link>
             {
                 user ? <Link href="/users/dashboard" className="hover:text-[#1e88e5] transition-all">Dashboard</Link> : null
             }
@@ -21,7 +22,7 @@ const UserActionButton = async () => {
                     <Link href="/anime/collection" className="hover:text-[#1e88e5] transition-all">Collection</Link>
             }
             {
-                user?.role == "admin" && <Link href={"/admin"} className="hover:text-[#1e88e5] transition-all">Admin</Link>  
+                user?.role == "admin" && <Link href={"/admin"} className="hover:text-[#1e88e5] transition-all">Admin</Link>
             }
             <Link href={actionURL} className="hover:text-[#1e88e5] transition-all ">{actionLabel}</Link>
         </div>

@@ -7,6 +7,7 @@ export const useSharedState = () => useContext(StateContext);
 
 const StateProvider = ({ children }) => {
   const [toggleList, setToggleList] = useState(false);
+  const [toggleInput, setToggleInput] = useState(false)
 
   useEffect(() => {
     if (toggleList) {
@@ -20,7 +21,7 @@ const StateProvider = ({ children }) => {
   }, [toggleList]);
 
   return (
-    <StateContext.Provider value={{ toggleList, setToggleList }}>
+    <StateContext.Provider value={{ toggleList, setToggleList, toggleInput, setToggleInput }}>
       {children}
     </StateContext.Provider>
   );

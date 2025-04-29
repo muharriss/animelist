@@ -2,12 +2,14 @@ import Header from "@/components/AnimeList/Header";
 import AnimeList from "@/components/AnimeList";
 import { getAnimeResponse, getNestedAnimeResponse, reproduce } from "@/libs/api-libs";
 import SeasonalAnime from "@/components/AnimeList/SeasonalAnime";
+// import TabsTopAnime from "@/components/AnimeList/TabsTopAnime";
+import TopAnime from "@/components/AnimeList/TopAnime";
 
 const Page = async () => {
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  const topAnime = await getAnimeResponse("top/anime", "limit=8")
+  // const topAnime = await getAnimeResponse("top/anime", "limit=8")
   let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry")
 
   // const end = Math.floor(Math.random() * (200 - 4 + 1)) + 4
@@ -33,13 +35,12 @@ const Page = async () => {
       </section>
       {await delay(500)}
       <section className="w-full max-w-5xl">
-        <Header LinkHref={"/upcoming"} title={"Akan Datang"} LinkTitle={"Lihat semua..."} />
+        <Header LinkHref={"/anime/upcoming"} title={"Akan Datang"} LinkTitle={"Lihat semua..."} />
         <AnimeList api={upcoming} />
       </section>
       {await delay(500)}
       <section className="w-full max-w-5xl">
-        <Header LinkHref={"/populer"} title={"Anime Teratas"} LinkTitle={"Lihat semua..."} />
-        <AnimeList api={topAnime} />
+        <TopAnime />
       </section>
       {await delay(500)}
       <section className="pb-5 w-full max-w-5xl">

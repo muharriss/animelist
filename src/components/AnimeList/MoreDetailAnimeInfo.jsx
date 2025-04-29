@@ -24,7 +24,7 @@ const MoreDetailAnimeInfo = ({ detailAnime }) => {
                     <p className="min-w-32 border-r dark:border-[#333333]">Premiered</p>
                     <div className="pl-7" >
                         {detailAnime.data.season ? (
-                            <Link href={`/season/${detailAnime.data.year}/${detailAnime.data.season}`} className=" capitalize text-[#1e88e5]">{ detailAnime.data.season + " " + detailAnime.data.year}</Link>
+                            <Link href={`/anime/season/${detailAnime.data.year}/${detailAnime.data.season}`} className=" capitalize text-[#1e88e5]">{ detailAnime.data.season + " " + detailAnime.data.year}</Link>
                         ) : (
                             <p>Unknown</p>
                         )}

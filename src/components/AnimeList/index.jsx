@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-const AnimeList = ({ api }) => {
+const AnimeList = ({ api, type="anime" }) => {
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center  pb-0 p-3 ">
             {api.data?.map((anime, index) => {
@@ -27,7 +27,7 @@ const AnimeList = ({ api }) => {
                                         )
                                 )
                         }
-                        <Link href={`/anime/${anime.mal_id}`} className=" hover:text-[#1e88e5] transition-all pb-5 " >
+                        <Link href={`/${type}/${anime.mal_id}`} className=" hover:text-[#1e88e5] transition-all pb-5 " >
                             <img
                                 src={anime.images.webp.image_url}
                                 alt={anime.images.jpg.image_url}

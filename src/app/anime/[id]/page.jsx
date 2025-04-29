@@ -75,7 +75,7 @@ const Page = async ({ params: { id } }) => {
                                 detailAnime.data.genres
                                     .map((genre, index) =>
                                         <span key={genre.mal_id}>
-                                            <Link href={`/genre/${genre.mal_id}/${genre.name}`} className="text-[#1e88e5]">
+                                            <Link href={`/anime/genre/${genre.mal_id}/${genre.name}`} className="text-[#1e88e5]">
                                                 {genre.name}
                                             </Link>
                                             {index < detailAnime.data.genres.length - 1 && ", "}
@@ -95,7 +95,7 @@ const Page = async ({ params: { id } }) => {
                                 .map((studio, index) => {
                                     return (
                                         <span key={studio.mal_id}>
-                                            <Link href={`/producer/${studio.mal_id}/${studio.name}`} className="text-[#1e88e5]">
+                                            <Link href={`/anime/producer/${studio.mal_id}/${studio.name}`} className="text-[#1e88e5]">
                                                 {studio.name}
                                             </Link>
                                             {index < detailAnime.data.studios.length - 1 && ", "}

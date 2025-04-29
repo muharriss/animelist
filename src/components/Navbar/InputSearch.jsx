@@ -1,6 +1,6 @@
 'use client'
 
-import { List, MagnifyingGlass, Moon, Sun } from "@phosphor-icons/react"
+import { CaretDown, List, MagnifyingGlass, Moon, Sun } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -14,9 +14,11 @@ import Image from "next/image"
 import Link from "next/link"
 
 const InputSearch = ({ user }) => {
-    const [toggleInput, setToggleInput] = useState(false)
+    const {toggleInput, setToggleInput} = useSharedState()
     const { toggleList, setToggleList } = useSharedState();
     const [searchValue, setSearchValue] = useState("")
+    const [toggleSelectSearch, setToggleSelectSearch] = useState(false)
+    const [selectSearchValue, setSelectSearchValue] = useState("anime")
     const router = useRouter()
 
     const defaultImg = "/default-profile.jpeg"
@@ -55,7 +57,7 @@ const InputSearch = ({ user }) => {
                 if (searchValue.length == 0 || searchValue.trim() == "") {
                     setToggleInput(!toggleInput)
                 } else {
-                    router.push(`/search/${searchValue}`)
+                    router.push(`/${selectSearchValue}/search/${searchValue}`)
                 }
             } finally {
                 setSearchValue("")
@@ -66,8 +68,20 @@ const InputSearch = ({ user }) => {
     }
 
     return (
-        <div className="flex items-center gap-2 ">
-            <input placeholder="cari anime..." onKeyDown={handleSearch} value={searchValue} className={`shadow-sm border-2 w-48 md:w-auto dark:border-[#333333] rounded-md outline-none p-2 dark:bg-[#121212] ${toggleInput ? "block" : "hidden"}`} onChange={e => setSearchValue(e.target.value)} />
+        <div className="flex items-center gap-2">
+            <div className={`relative  ${toggleInput ? "hidden md:block" : "hidden"} `}>
+                <button onClick={() => setToggleSelectSearch(!toggleSelectSearch)} className="flex items-center gap-1 selectLabel pl-3  rounded-md">
+                    <p className="capitalize">{selectSearchValue}</p>
+                    <CaretDown />
+                </button>
+                {toggleSelectSearch && (
+                    <div className="absolute  bg-white/90  dark:bg-[#1e1e1e]/90 text-left  p-1 w-28  rounded-md space-y-1">
+                        <button onClick={() => {setToggleSelectSearch(false), setSelectSearchValue("anime")}} className={`px-2 text-left w-full ${selectSearchValue == "anime" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Anime</button>
+                        <button onClick={() => {setToggleSelectSearch(false), setSelectSearchValue("manga")}} className={`px-2 text-left w-full ${selectSearchValue == "manga" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Manga</button>
+                    </div>
+                )}
+            </div>
+            <input placeholder={`cari ${selectSearchValue}...`} onKeyDown={handleSearch} value={searchValue} className={` shadow-sm border-2 w-48 md:w-auto dark:border-[#333333] rounded-md outline-none p-2 dark:bg-[#121212] ${toggleInput ? "hidden md:block" : "hidden"}`} onChange={e => setSearchValue(e.target.value)} />
             <MagnifyingGlass size={28} weight="thin" onClick={handleSearch} className={`cursor-pointer dark:hover:bg-gray-700 rounded transition-all ${searchValue.length > 0 ? "animate-pulse" : "animate-none"} ${toggleInput ? "scale-110" : ""}`} />
             {
                 resolvedTheme === "light"
