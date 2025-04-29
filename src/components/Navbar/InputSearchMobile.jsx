@@ -1,15 +1,15 @@
 'use client'
 
-import { CaretDown, MagnifyingGlass,  } from "@phosphor-icons/react"
+import { CaretDown, MagnifyingGlass, } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSharedState } from "./StateContext"
 
 const InputSearchMobile = () => {
     const [searchValue, setSearchValue] = useState("")
-    const [toggleSelectSearch, setToggleSelectSearch] = useState(false)
     const [selectSearchValue, setSelectSearchValue] = useState("anime")
-    const {toggleInput, setToggleInput} = useSharedState()
+    const { toggleInput, setToggleInput } = useSharedState()
+    const { toggleSelectSearch, setToggleSelectSearch } = useSharedState();
     const router = useRouter()
 
     const handleSearch = (event) => {
@@ -19,20 +19,37 @@ const InputSearchMobile = () => {
             try {
                 if (searchValue.length == 0 || searchValue.trim() == "") {
                     setToggleInput(!toggleInput)
+                    setToggleSelectSearch(false)
                 } else {
                     router.push(`/${selectSearchValue}/search/${searchValue}`)
                 }
             } finally {
                 setSearchValue("")
                 setToggleInput(!toggleInput)
+                setToggleSelectSearch(false)
             }
 
         }
     }
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (toggleInput) {
+                setToggleInput(false);
+                setToggleSelectSearch(false)
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [toggleInput]);
+
     return (
-        <div className={`flex items-center gap-2 px-3 pb-2  ${toggleInput ? "block md:hidden" : "hidden"} `}>
-            <div className={`relative `}>
+        <div className={`flex items-center gap-2 px-3 pb-2  ${toggleInput ? "block md:hidden" : "hidden"} `} >
+            <div className={`relative `} >
                 <button onClick={() => setToggleSelectSearch(!toggleSelectSearch)} className="flex items-center gap-1">
                     <p className="capitalize">{selectSearchValue}</p>
                     <CaretDown />

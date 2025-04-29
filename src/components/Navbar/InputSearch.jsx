@@ -14,10 +14,10 @@ import Image from "next/image"
 import Link from "next/link"
 
 const InputSearch = ({ user }) => {
-    const {toggleInput, setToggleInput} = useSharedState()
+    const { toggleInput, setToggleInput } = useSharedState()
     const { toggleList, setToggleList } = useSharedState();
+    const { toggleSelectSearch, setToggleSelectSearch } = useSharedState();
     const [searchValue, setSearchValue] = useState("")
-    const [toggleSelectSearch, setToggleSelectSearch] = useState(false)
     const [selectSearchValue, setSelectSearchValue] = useState("anime")
     const router = useRouter()
 
@@ -56,12 +56,14 @@ const InputSearch = ({ user }) => {
             try {
                 if (searchValue.length == 0 || searchValue.trim() == "") {
                     setToggleInput(!toggleInput)
+                    setToggleSelectSearch(false)
                 } else {
                     router.push(`/${selectSearchValue}/search/${searchValue}`)
                 }
             } finally {
                 setSearchValue("")
                 setToggleInput(!toggleInput)
+                setToggleSelectSearch(false)
             }
 
         }
@@ -76,8 +78,8 @@ const InputSearch = ({ user }) => {
                 </button>
                 {toggleSelectSearch && (
                     <div className="absolute  bg-white/90  dark:bg-[#1e1e1e]/90 text-left  p-1 w-28  rounded-md space-y-1">
-                        <button onClick={() => {setToggleSelectSearch(false), setSelectSearchValue("anime")}} className={`px-2 text-left w-full ${selectSearchValue == "anime" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Anime</button>
-                        <button onClick={() => {setToggleSelectSearch(false), setSelectSearchValue("manga")}} className={`px-2 text-left w-full ${selectSearchValue == "manga" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Manga</button>
+                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("anime") }} className={`px-2 text-left w-full ${selectSearchValue == "anime" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Anime</button>
+                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("manga") }} className={`px-2 text-left w-full ${selectSearchValue == "manga" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Manga</button>
                     </div>
                 )}
             </div>
@@ -90,7 +92,7 @@ const InputSearch = ({ user }) => {
                     :
                     <Moon onClick={() => setTheme('light')} size={28} weight="thin" className="cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
             }
-            <List onClick={() => setToggleList(!toggleList)} weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
+            <List onClick={() => { setToggleList(!toggleList), setToggleInput(false), setToggleSelectSearch(false) }} weight="thin" size={28} className="block sm:hidden cursor-pointer dark:hover:bg-gray-700 rounded transition-all" />
             {user ? (
                 <Link href={"/users/dashboard"} className="bg-gray-200 w-8 h-8 rounded-full object-cover overflow-hidden ml-1 ">
                     <img
