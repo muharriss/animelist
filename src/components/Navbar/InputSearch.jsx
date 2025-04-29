@@ -70,16 +70,16 @@ const InputSearch = ({ user }) => {
     }
 
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 z-20">
             <div className={`relative  ${toggleInput ? "hidden md:block" : "hidden"} `}>
-                <button onClick={() => setToggleSelectSearch(!toggleSelectSearch)} className="flex items-center gap-1 selectLabel pl-3  rounded-md">
+                <button onClick={() => setToggleSelectSearch(!toggleSelectSearch)} className="flex items-center gap-1 selectLabel pl-3  rounded-md ">
                     <p className="capitalize">{selectSearchValue}</p>
                     <CaretDown />
                 </button>
                 {toggleSelectSearch && (
-                    <div className="absolute  bg-white/90  dark:bg-[#1e1e1e]/90 text-left  p-1 w-28  rounded-md space-y-1">
-                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("anime") }} className={`px-2 text-left w-full ${selectSearchValue == "anime" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Anime</button>
-                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("manga") }} className={`px-2 text-left w-full ${selectSearchValue == "manga" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Manga</button>
+                    <div className="absolute top-8  bg-white/90  dark:bg-[#1e1e1e]/90 text-left  p-1 w-28  rounded-md space-y-1">
+                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("anime") }} className={`p-2 text-left w-full ${selectSearchValue == "anime" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Anime</button>
+                        <button onClick={() => { setToggleSelectSearch(false), setSelectSearchValue("manga") }} className={`p-2 text-left w-full ${selectSearchValue == "manga" && "bg-neutral-200  dark:bg-neutral-300/5"} rounded-sm hover:bg-neutral-200  hover:dark:bg-neutral-300/5`}>Manga</button>
                     </div>
                 )}
             </div>

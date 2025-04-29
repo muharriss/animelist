@@ -15,7 +15,7 @@ const ListBar = ({ user }) => {
     const actionURL = user ? "/api/auth/signout" : "/api/auth/signin"
 
     return (
-        <div className={`fixed max-w-5xl w-screen h-screen bg-transparent flex z-10  ${toggleList ? "block" : "hidden"} `}>
+        <div className={`fixed max-w-5xl w-screen h-screen bg-transparent flex z-30  ${toggleList ? "block" : "hidden"} `}>
 
             <div className="p-6 w-1/2 h-screen bg-white dark:bg-[#121212] ">
                 <button onClick={handleClose} className="float-right text-xl dark:hover:bg-gray-700 rounded transition-all px-1">X</button>

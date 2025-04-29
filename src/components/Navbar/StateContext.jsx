@@ -11,7 +11,7 @@ const StateProvider = ({ children }) => {
   const [toggleSelectSearch, setToggleSelectSearch] = useState(false)
 
   useEffect(() => {
-    if (toggleList) {
+    if (toggleList || toggleInput) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -19,7 +19,7 @@ const StateProvider = ({ children }) => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [toggleList]);
+  }, [toggleList, toggleInput]);
 
   return (
     <StateContext.Provider value={{ toggleList, setToggleList, toggleInput, setToggleInput, toggleSelectSearch, setToggleSelectSearch }}>
